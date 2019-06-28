@@ -1,0 +1,23 @@
+{
+  "name": "insta.js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/kaykyr/insta.js",
+  "author": "Kayky Ramos <kayky@me.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "form-data": "^2.4.0",
+    "got": "^9.6.0",
+    "youch": "^2.0.10"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1",
+    "sucrase": "^3.10.1"
+  }
+}

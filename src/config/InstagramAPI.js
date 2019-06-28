@@ -1,0 +1,16 @@
+export default {
+    url: "www.instagram.com/",
+    url_tag: "www.instagram.com/explore/tags/%s/?__a=1",
+    url_location: "www.instagram.com/explore/locations/%s/?__a=1",
+    url_likes: "www.instagram.com/web/likes/%s/like/",
+    url_unlike: "www.instagram.com/web/likes/%s/unlike/",
+    url_comment: "www.instagram.com/web/comments/%s/add/",
+    url_follow: "www.instagram.com/web/friendships/%s/follow/",
+    url_unfollow: "www.instagram.com/web/friendships/%s/unfollow/",
+    url_login: "www.instagram.com/accounts/login/ajax/",
+    url_logout: "www.instagram.com/accounts/logout/",
+    url_media_detail: "www.instagram.com/p/%s/?__a=1",
+    url_media: "www.instagram.com/p/%s/",
+    url_user_detail: "www.instagram.com/%s/",
+    api_user_detail: "i.instagram.com/api/v1/users/%s/info/",
+}
