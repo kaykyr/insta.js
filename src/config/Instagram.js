@@ -1,0 +1,18 @@
+export default {
+    base: "https://www.instagram.com",
+    APIBase: "https://i.instagram.com",
+    _home: "/",
+    _tag: "/explore/tags/%s/?__a=1",
+    _location: "/explore/locations/%s/?__a=1",
+    _likes: "/web/likes/%s/like/",
+    _unlike: "/web/likes/%s/unlike/",
+    _comment: "/web/comments/%s/add/",
+    _follow: "/web/friendships/%s/follow/",
+    _unfollow: "/web/friendships/%s/unfollow/",
+    _login: "/accounts/login/ajax/",
+    _logout: "/accounts/logout/",
+    _media_detail: "/p/%s/?__a=1",
+    _media: "/p/%s/",
+    _user_detail: "/%s/",
+    _api_user_detail: "/api/v1/users/%s/info/",
+}
