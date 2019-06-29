@@ -1,6 +1,7 @@
-import API from '../../lib/API'
+import FormData from 'form-data'
+import HTTP from '../../lib/HTTP'
 
-import Instagram from '../../config/Instagram'
+import InstagramAPI from '../../config/InstagramAPI'
 
 class LoginController {
     async validateCredentials(req, res, next) {
@@ -8,11 +9,15 @@ class LoginController {
     }
 
     async login(req, res) {
-        const { username, password } = req.body
+        await HTTP.get(InstagramAPI.url)
 
-        await API.get()
-        const request = await API.post(Instagram._login, { username, password })
-        res.status(request.status).send(request.data)
+        const form = new FormData()
+        form.append('username', req.body.username)
+        form.append('password', req.body.password)
+
+        const request = await HTTP.post('instagram.com/accounts/login/ajax/', { body: form })
+
+        return res.status(200).send(request)
     }
 }
 
