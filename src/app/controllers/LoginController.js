@@ -4,6 +4,9 @@ import Instagram from '../../config/Instagram'
 
 class LoginController {
     async validateCredentials(req, res, next) {
+        /**
+         * Credentials needs to be validated (no @, no e-mails, not invalid characters in username)
+         */
         return next()
     }
 

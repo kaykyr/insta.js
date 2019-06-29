@@ -1,4 +1,6 @@
 import axios from 'axios'
+import qs from 'qs'
+
 import Instagram from '../config/Instagram'
 
 class API {
@@ -21,42 +23,26 @@ class API {
         axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
     }
 
-    async get(path) {
-        const context = {
-            url: path,
-            method: 'GET',
-        }
-
-        const request = await this.request(context)
-        this.setCookies(request.headers)
-        return request
-    }
-
-
-    async request(context) {
-        const { url, method, headers, data } = context
-        return await axios.request({ url, method, headers, data }).then((response) => {
-            return response
-        }).catch((response) => {
-            return response
-        })
-    }
-
     setCookies(headers) {
-        let cookies, csrftoken = ''
+        let csrftoken, cookies = ''
 
         headers['set-cookie'].map((cookie) => {
             cookies += cookie.startsWith('csrftoken') ? this.filterCookie(cookie) : ''
             cookies += cookie.startsWith('rur') ? this.filterCookie(cookie) : ''
             cookies += cookie.startsWith('mid') ? this.filterCookie(cookie) : ''
+            cookies += cookie.startsWith('ds_user_id') ? this.filterCookie(cookie) : ''
+            cookies += cookie.startsWith('sessionid') ? this.filterCookie(cookie) : ''
+            cookies += cookie.startsWith('shbid') ? this.filterCookie(cookie) : ''
+            cookies += cookie.startsWith('shbts') ? this.filterCookie(cookie) : ''
 
             if (cookie.startsWith('csrftoken'))
                 csrftoken = this.filterCookie(cookie).split('=')[1]
         })
 
+
         const xcsrftoken = csrftoken.split(';')[0]
         axios.defaults.headers['X-CSRFToken'] = xcsrftoken
-        axios.defaults.headers['Cookies'] = cookies
+        axios.defaults.headers['Cookie'] = cookies
 
         return this
     }
@@ -69,14 +55,38 @@ class API {
         return ' '
     }
 
+    async request(context) {
+        const { url, method, headers, data } = context
+        return await axios.request({ url, method, headers, data }).then((response) => {
+            return response
+        }).catch((response) => {
+            return response
+        })
+    }
+
+    async get(path) {
+        const context = {
+            url: path,
+            method: 'GET',
+        }
+
+        const request = await this.request(context)
+        this.setCookies(request.headers)
+        
+        return { data, status } = request
+    }
+
     async post(path, body) {
         const context = {
             url: path,
             method: 'POST',
-            data: body,
+            data: qs.stringify(body),
         }
 
-        return await this.request(context)   
+        const request = await this.request(context)   
+        this.setCookies(request.headers)
+
+        return { data, status } = request
     }
 }
 
