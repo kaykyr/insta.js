@@ -21,7 +21,7 @@ Contais the following Instagram features:
 - [ ] Create post
 
 ----------
-## Requiriments
+## Requirements
 This API requires a MongoDB link to store Instagram's sessions
 
 ## Installation
