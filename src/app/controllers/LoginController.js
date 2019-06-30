@@ -29,7 +29,7 @@ class LoginController {
         } else {
             const request = await API.get()
 
-            if (request.data.indexOf(username) !== 1) {
+            if (request.data.includes(username)) {
                 res.status(200).json({
                     authenticated: true,
                     status: "ok"
