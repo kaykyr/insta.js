@@ -3,7 +3,7 @@
 This is Instagram's Web REST API.
 
 ----------
-Contais the following Instagram features:
+Contains the following Instagram features:
 
 - [x] Login
 - [x] Search media, users, locations and tags
