@@ -15,6 +15,10 @@ Contais the following Instagram features:
 - [x] Unfollow
 - [x] Get user following
 - [x] Get user followers
+- [ ] Get comments from media
+- [ ] Get likes from media
+- [ ] Get likes from comment
+- [ ] Create post
 
 ----------
 ## Requiriments
