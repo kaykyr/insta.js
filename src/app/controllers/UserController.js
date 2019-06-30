@@ -1,5 +1,3 @@
-import qs from 'qs'
-
 import API from '../../lib/API'
 
 import Instagram from '../../config/Instagram'
