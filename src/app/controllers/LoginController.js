@@ -13,9 +13,34 @@ class LoginController {
     async login(req, res) {
         const { username, password } = req.body
 
-        await API.get()
-        const request = await API.post(Instagram._login, { username, password })
-        res.status(request.status).send(request.data)
+        const hasSession = await API.recoverSession(username);
+
+        if (!hasSession) {
+            await API.get()
+
+            const request = await API.post(Instagram._login, { username, password })
+            const session = request.headers['set-cookie']
+        
+            await API.saveSession(session, username)
+
+            await API.get()
+
+            res.status(request.status).send(request.data)
+        } else {
+            const request = await API.get()
+
+            if (request.data.indexOf(username) !== 1) {
+                res.status(200).json({
+                    authenticated: true,
+                    status: "ok"
+                })
+            } else {
+                res.status(401).json({
+                    authenticated: false,
+                    status: "fail"
+                })
+            }
+        }
     }
 }
 

@@ -1,6 +1,8 @@
 import axios from 'axios'
 import qs from 'qs'
 
+import Session from '../app/schemas/Session'
+
 import Instagram from '../config/Instagram'
 
 class API {
@@ -26,7 +28,7 @@ class API {
     setCookies(headers) {
         let csrftoken, cookies = ''
 
-        headers['set-cookie'].map((cookie) => {
+        headers.map((cookie) => {
             cookies += cookie.startsWith('csrftoken') ? this.filterCookie(cookie) : ''
             cookies += cookie.startsWith('rur') ? this.filterCookie(cookie) : ''
             cookies += cookie.startsWith('mid') ? this.filterCookie(cookie) : ''
@@ -71,9 +73,9 @@ class API {
         }
 
         const request = await this.request(context)
-        this.setCookies(request.headers)
+        this.setCookies(request.headers['set-cookie'])
         
-        return { data, status } = request
+        return request
     }
 
     async post(path, body) {
@@ -84,9 +86,24 @@ class API {
         }
 
         const request = await this.request(context)   
-        this.setCookies(request.headers)
+        this.setCookies(request.headers['set-cookie'])
 
-        return { data, status } = request
+        return request
+    }
+
+    async saveSession(session, username) {
+        await Session.create({
+            username,
+            session_data: session
+        })
+
+        return this
+    }
+
+    async recoverSession(username) {
+        const session = await Session.findOne({ username })
+        if (session) this.setCookies(session.session_data)
+        return session ? true : false
     }
 }
 
