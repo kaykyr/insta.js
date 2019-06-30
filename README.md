@@ -29,7 +29,7 @@ Clone this repository
 
 ### With Yarn
 
-If you have yarn installed, just run the followin command:
+If you have yarn installed, just run the following command:
 ```sh
 yarn install
 ```
