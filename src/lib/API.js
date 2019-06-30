@@ -85,7 +85,7 @@ class API {
             data: qs.stringify(body),
         }
 
-        const request = await this.request(context)   
+        const request = await this.request(context)
         this.setCookies(request.headers['set-cookie'])
 
         return request
