@@ -8,7 +8,7 @@ class TagController {
 
         if (!tag) return res.status(400).json({ error: 'Tag not provided' })
 
-        const response = await API.get(Instagram._tag.replace('%s', tag))
+        const response = await new API().get(Instagram._tag.replace('%s', tag))
 
         return res.status(response.status)
             .send(response.data)

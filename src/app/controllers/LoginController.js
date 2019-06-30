@@ -4,35 +4,42 @@ import Instagram from '../../config/Instagram'
 
 class LoginController {
     async validateCredentials(req, res, next) {
-        /**
-         * Credentials needs to be validated (no @, no e-mails, not invalid characters in username)
-         */
+        const { username } = req.body
+
+        if (username.includes('@')) {
+            return res.status(400).json({ error: "Provide your instagram username without @/email" })
+        }
+
         return next()
     }
 
     async login(req, res) {
         const { username, password } = req.body
 
-        const hasSession = await API.recoverSession(username);
+        let session = await new API().recoverSession(username);
 
-        if (!hasSession) {
-            await API.get()
+        if (!session) {
+            await new API().get()
 
-            const request = await API.post(Instagram._login, { username, password })
-            const session = request.headers['set-cookie']
+            const request        = await new API().post(Instagram._login, { username, password })
+            const headersCookies = request.headers['set-cookie']
         
-            await API.saveSession(session, username)
+            let session = await new API().saveSession(headersCookies, username)
 
-            await API.get()
+            await new API().get()
 
-            res.status(request.status).send(request.data)
+            let response = request.data
+            response.sessionid = session._id
+
+            res.status(request.status).json(response)
         } else {
-            const request = await API.get()
+            const request = await new API().get()
 
             if (request.data.includes(username)) {
                 res.status(200).json({
                     authenticated: true,
-                    status: "ok"
+                    status: "ok",
+                    sessionid: session._id
                 })
             } else {
                 res.status(401).json({

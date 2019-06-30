@@ -8,7 +8,7 @@ class LocationController {
 
         if (!location) return res.status(400).json({ error: 'Location not provided' })
 
-        const response = await API.get(Instagram._location.replace('%s', location))
+        const response = await new API().get(Instagram._location.replace('%s', location))
 
         return res.status(response.status)
             .send(response.data)

@@ -12,6 +12,7 @@ import UnlikeController from './app/controllers/UnlikeController'
 import CommentController from './app/controllers/CommentController'
 import FollowController from './app/controllers/FollowController'
 import UnfollowController from './app/controllers/UnfollowController'
+import LogoutController from './app/controllers/LogoutController'
 
 const routes = new Router()
 
@@ -33,5 +34,7 @@ routes.post('/unlike', UnlikeController.store)
 routes.post('/comment', CommentController.store)
 routes.post('/follow', FollowController.store)
 routes.post('/unfollow', UnfollowController.store)
+
+routes.get('/logout', LogoutController.delete)
 
 export default routes

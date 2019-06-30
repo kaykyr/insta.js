@@ -3,6 +3,8 @@ import express from 'express'
 import Youch from 'youch'
 import 'express-async-errors'
 
+import proxy from './app/middlewares/proxy'
+
 import routes  from './routes'
 
 import './database'
@@ -18,6 +20,7 @@ class App {
 
     middlewares() {
         this.server.use(express.json())
+        this.server.use(proxy)
     }
 
     routes() {

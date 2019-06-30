@@ -6,7 +6,7 @@ class UserController {
     async feed(req, res) {
         const { username = req.username } = req.body
 
-        const response = await API.get(Instagram._feed.replace('%s', username))
+        const response = await new API().get(Instagram._feed.replace('%s', username))
 
         return res.status(response.status)
             .send(response.data)
@@ -23,7 +23,7 @@ class UserController {
             after
         })
 
-        const response = await API.get(Instagram._followers.replace('%s', variables))
+        const response = await new API().get(Instagram._followers.replace('%s', variables))
 
         return res.status(response.status)
             .send(response.data)
@@ -40,7 +40,7 @@ class UserController {
             after
         })
 
-        const response = await API.get(Instagram._following.replace('%s', variables))
+        const response = await new API().get(Instagram._following.replace('%s', variables))
 
         return res.status(response.status)
             .send(response.data)

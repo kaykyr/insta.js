@@ -1,3 +1,4 @@
+import httpsProxyAgent from 'https-proxy-agent'
 import axios from 'axios'
 import qs from 'qs'
 
@@ -6,9 +7,12 @@ import Session from '../app/schemas/Session'
 import Instagram from '../config/Instagram'
 
 class API {
-    constructor() {
-        axios.defaults.baseURL = Instagram.base
-        this.setHeaders()
+    constructor(init = true) {
+        if (init) {
+            axios.defaults.baseURL = Instagram.base
+            if (global.proxy) axios.defaults.httpsAgent = new httpsProxyAgent(global.proxy);
+            this.setHeaders()
+        }
     }
 
     setHeaders() {
@@ -59,6 +63,7 @@ class API {
 
     async request(context) {
         const { url, method, headers, data } = context
+
         return await axios.request({ url, method, headers, data }).then((response) => {
             return response
         }).catch((response) => {
@@ -91,20 +96,20 @@ class API {
         return request
     }
 
-    async saveSession(session, username) {
-        await Session.create({
+    async saveSession(cookies, username) {
+        const session = await Session.create({
             username,
-            session_data: session
+            session_data: cookies
         })
 
-        return this
+        return session
     }
 
     async recoverSession(username) {
         const session = await Session.findOne({ username })
         if (session) this.setCookies(session.session_data)
-        return session ? true : false
+        return session
     }
 }
 
-export default new API()
+export default API
