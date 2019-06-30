@@ -19,7 +19,10 @@ Contains the following Instagram features:
 - [ ] Get likes from media
 - [ ] Get likes from comment
 - [ ] Create post
-
+----------
+### REST API FEATURES
+- [x] Proxy support
+- [x] Session support
 ----------
 ## Requirements
 This API requires a MongoDB link to store Instagram's sessions
