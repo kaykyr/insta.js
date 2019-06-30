@@ -41,7 +41,6 @@ By default, insta.js runs over port 3333.
 # Incoming features
 - [ ] Bot Examples (NodeJS, PHP, Python)
 - [ ] Manage Sessions
-- [x] More features coming
 
 # Contribute
 Contributions are welcome, if you have suggestions, please, create issues, if you are a Node JS programmer and would like to contribute, please, create pull requests.
