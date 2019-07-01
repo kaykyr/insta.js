@@ -5,6 +5,7 @@ import qs from 'qs'
 import Session from '../app/schemas/Session'
 
 import Instagram from '../config/Instagram'
+import UserAgent from '../config/UserAgent'
 
 class API {
     constructor(init = true) {
@@ -15,6 +16,10 @@ class API {
         }
     }
 
+    createDevice() {
+        axios.defaults.headers['User-Agent'] = UserAgent()
+    }
+
     setHeaders() {
         axios.defaults.headers['Accept']           = '*/*'
         axios.defaults.headers['Accept-Language']  = 'en-US,en;q=0.9,es;q=0.8,fr;q=0.7,pt;q=0.6,zh-CN;q=0.5,zh;q=0.4,gl;q=0.3'
@@ -23,32 +28,35 @@ class API {
         axios.defaults.headers['Host']             = 'www.instagram.com'
         axios.defaults.headers['Origin']           = 'https://www.instagram.com'
         axios.defaults.headers['Referer']          = 'https://www.instagram.com/'
-        axios.defaults.headers['User-Agent']       = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'
         axios.defaults.headers['X-Instagram-AJAX'] = '1'
         axios.defaults.headers['Content-Type']     = 'application/x-www-form-urlencoded'
         axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
     }
 
     setCookies(headers) {
-        let csrftoken, cookies = ''
+        if (headers) {
+            let csrftoken, cookies = ''
 
-        headers.map((cookie) => {
-            cookies += cookie.startsWith('csrftoken') ? this.filterCookie(cookie) : ''
-            cookies += cookie.startsWith('rur') ? this.filterCookie(cookie) : ''
-            cookies += cookie.startsWith('mid') ? this.filterCookie(cookie) : ''
-            cookies += cookie.startsWith('ds_user_id') ? this.filterCookie(cookie) : ''
-            cookies += cookie.startsWith('sessionid') ? this.filterCookie(cookie) : ''
-            cookies += cookie.startsWith('shbid') ? this.filterCookie(cookie) : ''
-            cookies += cookie.startsWith('shbts') ? this.filterCookie(cookie) : ''
+            headers.map((cookie) => {
+                cookies += cookie.startsWith('csrftoken') ? this.filterCookie(cookie) : ''
+                cookies += cookie.startsWith('rur') ? this.filterCookie(cookie) : ''
+                cookies += cookie.startsWith('mid') ? this.filterCookie(cookie) : ''
+                cookies += cookie.startsWith('ds_user_id') ? this.filterCookie(cookie) : ''
+                cookies += cookie.startsWith('sessionid') ? this.filterCookie(cookie) : ''
+                cookies += cookie.startsWith('shbid') ? this.filterCookie(cookie) : ''
+                cookies += cookie.startsWith('shbts') ? this.filterCookie(cookie) : ''
 
-            if (cookie.startsWith('csrftoken'))
-                csrftoken = this.filterCookie(cookie).split('=')[1]
-        })
+                if (cookie.startsWith('csrftoken'))
+                    csrftoken = this.filterCookie(cookie).split('=')[1]
+            })
 
 
-        const xcsrftoken = csrftoken.split(';')[0]
-        axios.defaults.headers['X-CSRFToken'] = xcsrftoken
-        axios.defaults.headers['Cookie'] = cookies
+            const xcsrftoken = csrftoken.split(';')[0]
+            axios.defaults.headers['X-CSRFToken'] = xcsrftoken
+            axios.defaults.headers['Cookie'] = cookies
+        } else {
+            throw Error ('ERROR: Something went wrong.')
+        }
 
         return this
     }
@@ -67,7 +75,7 @@ class API {
         return await axios.request({ url, method, headers, data }).then((response) => {
             return response
         }).catch((response) => {
-            return response
+            throw Error ('ERROR: Something went wrong.')
         })
     }
 
@@ -78,8 +86,6 @@ class API {
         }
 
         const request = await this.request(context)
-        this.setCookies(request.headers['set-cookie'])
-        
         return request
     }
 
@@ -91,15 +97,14 @@ class API {
         }
 
         const request = await this.request(context)
-        this.setCookies(request.headers['set-cookie'])
-
         return request
     }
 
     async saveSession(cookies, username) {
         const session = await Session.create({
             username,
-            session_data: cookies
+            session_data: cookies,
+            device: axios.defaults.headers['User-Agent'],
         })
 
         return session
@@ -107,7 +112,11 @@ class API {
 
     async recoverSession(username) {
         const session = await Session.findOne({ username })
-        if (session) this.setCookies(session.session_data)
+        if (session) {
+            this.setCookies(session.session_data)
+            axios.defaults.headers['User-Agent'] = session.device
+        }
+
         return session
     }
 }

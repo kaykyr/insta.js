@@ -9,6 +9,10 @@ const SessionSchema = new mongoose.Schema({
         type: Array,
         required: true,
     },
+    device: {
+        type: String,
+        required: true,
+    },
 }, {
     timestamps: true,
 })

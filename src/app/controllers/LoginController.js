@@ -16,24 +16,29 @@ class LoginController {
     async login(req, res) {
         const { username, password } = req.body
 
-        let session = await new API().recoverSession(username);
+        const api = new API()
+        let session = await api.recoverSession(username)
 
         if (!session) {
-            await new API().get()
+            api.createDevice()
 
-            const request        = await new API().post(Instagram._login, { username, password })
+            let request = await api.get()
+            api.setCookies(request.headers['set-cookie'])
+
+            request = await api.post(Instagram._login, { username, password })
             const headersCookies = request.headers['set-cookie']
+            api.setCookies(headersCookies)
         
-            let session = await new API().saveSession(headersCookies, username)
+            session = await api.saveSession(headersCookies, username)
 
-            await new API().get()
+            await api.get()
 
             let response = request.data
             response.sessionid = session._id
 
             res.status(request.status).json(response)
         } else {
-            const request = await new API().get()
+            const request = await api.get()
 
             if (request.data.includes(username)) {
                 res.status(200).json({
