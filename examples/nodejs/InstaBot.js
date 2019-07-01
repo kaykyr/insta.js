@@ -10,7 +10,7 @@ const credentials = {
 
 const hashtags = ['f4f','l4l']
 const usernames = ['apple','instagram']
-const locations = ['vancovuer','toronto']
+const locations = ['vancouver','toronto']
 
 async function init() {
     console.log('Logging into Instagram...')
