@@ -74,8 +74,8 @@ class API {
 
         return await axios.request({ url, method, headers, data }).then((response) => {
             return response
-        }).catch((response) => {
-            throw Error ('ERROR: Something went wrong.')
+        }).catch((err) => {
+            return err.response
         })
     }
 
