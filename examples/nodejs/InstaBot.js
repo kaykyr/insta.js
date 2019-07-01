@@ -8,7 +8,7 @@ const credentials = {
     password: "",
 }
 
-const hashtags = ['f4f','l4l']
+const hashtags  = ['f4f','l4l']
 const usernames = ['apple','instagram']
 const locations = ['vancouver','toronto']
 
