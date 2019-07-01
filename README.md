@@ -1,4 +1,4 @@
-# ![Logo](https://raw.githubusercontent.com/kaykyr/insta.js/master/assets/instagram.png) insta.js ![Latest Stable Version](https://img.shields.io/badge/stable-v1.0.0-blue.svg) ![Compatible](https://img.shields.io/badge/nodejs-10.16.0-green.svg) ![License](https://img.shields.io/github/license/kaykyr/insta.js.svg) ![Stars](https://img.shields.io/github/stars/kaykyr/insta.js.svg) ![Forks](https://img.shields.io/github/forks/kaykyr/insta.js.svg) ![Issues](https://img.shields.io/github/issues/kaykyr/insta.js.svg)
+# ![Logo](https://raw.githubusercontent.com/kaykyr/insta.js/master/assets/instagram.png) insta.js ![Latest Stable Version](https://img.shields.io/badge/stable-v1.0.2-blue.svg) ![Compatible](https://img.shields.io/badge/nodejs-10.16.0-green.svg) ![License](https://img.shields.io/github/license/kaykyr/insta.js.svg) ![Stars](https://img.shields.io/github/stars/kaykyr/insta.js.svg) ![Forks](https://img.shields.io/github/forks/kaykyr/insta.js.svg) ![Issues](https://img.shields.io/github/issues/kaykyr/insta.js.svg)
 
 This is Instagram's Web REST API.
 
