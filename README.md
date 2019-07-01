@@ -41,9 +41,16 @@ yarn install
 Edit .env file, put your default settings.
 By default, insta.js runs over port 3333.
 
+# Usage
+This sections is under construction, please, check the initial NodeJS example to get started
+
 # Incoming features
-- [ ] Bot Examples (NodeJS, PHP, Python)
+- [ ] Bot Examples
+    - [x] NodeJS
+    - [ ] PHP
+    - [ ] Python
 - [ ] Manage Sessions
+- [ ] Beautify Instagram's responses
 
 # Contribute
 Contributions are welcome, if you have suggestions, please, create issues, if you are a Node JS programmer and would like to contribute, please, create pull requests.
