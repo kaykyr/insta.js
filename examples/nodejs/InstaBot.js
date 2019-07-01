@@ -1,7 +1,7 @@
 const axios = require('axios')
 
 axios.defaults.baseURL = "http://localhost:3333"
-axios.defaults.headers['proxy'] = 'http://45.32.155.0:4002'
+axios.defaults.headers['proxy'] = ''
 
 const credentials = {
     username: "",
@@ -48,14 +48,14 @@ async function interactByTags(hashtags) {
 
 async function interactByUsernames(usernames) {
     /**
-     * Will be implemented yet
+     * Will be implemented
      */
     return
 }
 
 async function interactByLocations(locations) {
     /**
-     * Will be implemented yet
+     * Will be implemented
      */
     return
 }
