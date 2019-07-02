@@ -26,8 +26,6 @@ class MediaController {
             after,
         })
 
-        console.log(Instagram._likers.replace('%s', variables))
-
         const response = await new API().get(Instagram._likers.replace('%s', variables))
         return res.status(response.status)
             .send(response.data)
