@@ -4,6 +4,7 @@ import session from './app/middlewares/session'
 
 import LoginController from './app/controllers/LoginController'
 import UserController from './app/controllers/UserController'
+import MediaController from './app/controllers/MediaController'
 import TagController from './app/controllers/TagController'
 import LocationController from './app/controllers/LocationController'
 import SearchController from './app/controllers/SearchController'
@@ -23,6 +24,9 @@ routes.use(session)
 routes.post('/feed', UserController.feed)
 routes.post('/followers', UserController.followers)
 routes.post('/following', UserController.following)
+
+routes.post('/media', MediaController.index)
+routes.post('/likers', MediaController.likers)
 
 routes.post('/search', SearchController.index)
 
