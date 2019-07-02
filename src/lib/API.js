@@ -100,9 +100,10 @@ class API {
         return request
     }
 
-    async saveSession(cookies, username) {
+    async saveSession(cookies, username, userid) {
         const session = await Session.create({
             username,
+            userid,
             session_data: cookies,
             device: axios.defaults.headers['User-Agent'],
         })

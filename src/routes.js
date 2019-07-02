@@ -16,7 +16,7 @@ import LogoutController from './app/controllers/LogoutController'
 
 const routes = new Router()
 
-routes.post('/login', LoginController.validateCredentials, LoginController.login)
+routes.post('/login', LoginController.validateCredentials, async (req, res) => { LoginController.login(req, res) })
 
 routes.use(session)
 

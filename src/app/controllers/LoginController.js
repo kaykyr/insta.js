@@ -29,27 +29,30 @@ class LoginController {
             const headersCookies = request.headers['set-cookie']
             api.setCookies(headersCookies)
         
-            session = await api.saveSession(headersCookies, username)
+            session = await api.saveSession(headersCookies, username, request.data.userId)
 
             await api.get()
 
             let response = request.data
             response.sessionid = session._id
 
-            res.status(request.status).json(response)
+            return res.status(request.status).json(response)
         } else {
             const request = await api.get()
 
             if (request.data.includes(username)) {
-                res.status(200).json({
+                return res.status(200).json({
                     authenticated: true,
                     status: "ok",
-                    sessionid: session._id
+                    sessionid: session._id,
+                    userid: session.userid,
                 })
             } else {
-                res.status(401).json({
+                return res.status(401).json({
                     authenticated: false,
-                    status: "fail"
+                    status: "fail",
+                    sessionid: session._id,
+                    userid: session.userid,
                 })
             }
         }

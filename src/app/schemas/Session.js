@@ -5,6 +5,10 @@ const SessionSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    userid: {
+        type: Number,
+        required: true,
+    },
     session_data: {
         type: Array,
         required: true,
