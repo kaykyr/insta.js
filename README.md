@@ -1,4 +1,4 @@
-# ![Logo](https://raw.githubusercontent.com/kaykyr/insta.js/master/assets/instagram.png) insta.js ![Latest Stable Version](https://img.shields.io/badge/stable-v1.1.2-blue.svg) ![Compatible](https://img.shields.io/badge/nodejs-10.16.0-green.svg) ![License](https://img.shields.io/github/license/kaykyr/insta.js.svg) ![Stars](https://img.shields.io/github/stars/kaykyr/insta.js.svg) ![Forks](https://img.shields.io/github/forks/kaykyr/insta.js.svg) ![Issues](https://img.shields.io/github/issues/kaykyr/insta.js.svg)
+# ![Logo](https://raw.githubusercontent.com/kaykyr/insta.js/master/assets/instagram.png) insta.js ![Latest Stable Version](https://img.shields.io/badge/stable-v1.2.0-blue.svg) ![Compatible](https://img.shields.io/badge/nodejs-10.16.0-green.svg) ![License](https://img.shields.io/github/license/kaykyr/insta.js.svg) ![Stars](https://img.shields.io/github/stars/kaykyr/insta.js.svg) ![Forks](https://img.shields.io/github/forks/kaykyr/insta.js.svg) ![Issues](https://img.shields.io/github/issues/kaykyr/insta.js.svg)
 
 This is Instagram's Web REST API.
 
@@ -15,8 +15,8 @@ Contains the following Instagram features:
 - [x] Unfollow
 - [x] Get user following
 - [x] Get user followers
-- [ ] Get comments from media
-- [ ] Get likes from media
+- [x] Get comments from media
+- [x] Get likes from media
 - [ ] Get likes from comment
 - [ ] Create post
 ----------
