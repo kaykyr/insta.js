@@ -14,7 +14,7 @@
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "form-data": "^2.4.0",
-    "https-proxy-agent": "^2.2.1",
+    "https-proxy-agent": "^2.2.3",
     "mongoose": "^5.7.5",
     "qs": "^6.7.0",
     "youch": "^2.0.10"
